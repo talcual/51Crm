@@ -15,6 +15,24 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('leads.index')" :active="request()->routeIs('leads.*')">
+                        {{ __('Leads') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.*')">
+                        {{ __('Clients') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('deals.index')" :active="request()->routeIs('deals.*')">
+                        {{ __('Deals') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('quotes.index')" :active="request()->routeIs('quotes.*')">
+                        {{ __('Quotes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('payments.index')" :active="request()->routeIs('payments.*')">
+                        {{ __('Payments') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('loyalty.index')" :active="request()->routeIs('loyalty.*')">
+                        {{ __('Loyalty') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +87,24 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('leads.index')" :active="request()->routeIs('leads.*')">
+                {{ __('Leads') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.*')">
+                {{ __('Clients') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('deals.index')" :active="request()->routeIs('deals.*')">
+                {{ __('Deals') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('quotes.index')" :active="request()->routeIs('quotes.*')">
+                {{ __('Quotes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('payments.index')" :active="request()->routeIs('payments.*')">
+                {{ __('Payments') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('loyalty.index')" :active="request()->routeIs('loyalty.*')">
+                {{ __('Loyalty') }}
             </x-responsive-nav-link>
         </div>
 

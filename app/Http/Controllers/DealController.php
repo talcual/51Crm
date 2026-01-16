@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deal;
 use Illuminate\Http\Request;
 
 class DealController extends Controller
 {
+    public function index()
+    {
+        return view('deals.index');
+    }
     /**
      * Display a listing of the resource.
      */
