@@ -11,13 +11,6 @@ class DealController extends Controller
     {
         return view('deals.index');
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
