@@ -11,6 +11,8 @@ use App\Http\Controllers\LoyaltyController;
 use App\Http\Controllers\EmailSettingController;
 use App\Http\Controllers\EmailCampaignController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ClientProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +44,11 @@ Route::middleware('auth')->group(function () {
     
     // Client Management
     Route::resource('clients', ClientController::class);
+    Route::post('clients/{client}/products', [ClientProductController::class, 'store'])->name('clients.products.store');
+    Route::delete('clients/{client}/products/{clientProduct}', [ClientProductController::class, 'destroy'])->name('clients.products.destroy');
+
+    // Product Catalog (auxiliary/configuration module)
+    Route::resource('products', ProductController::class)->except('show');
     
     // Deal/Pipeline Management
     Route::resource('deals', DealController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -63,9 +64,10 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        $client->load('assignedUser', 'lead', 'deals', 'quotes', 'payments', 'loyaltyPoints');
+        $client->load('assignedUser', 'lead', 'deals', 'quotes', 'payments', 'loyaltyPoints', 'clientProducts.product');
+        $products = Product::where('active', true)->orderBy('name')->get();
 
-        return view('clients.show', compact('client'));
+        return view('clients.show', compact('client', 'products'));
     }
 
     /**

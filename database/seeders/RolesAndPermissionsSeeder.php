@@ -30,6 +30,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'edit clients',
             'delete clients',
             
+            // Product permissions
+            'view products',
+            'create products',
+            'edit products',
+            'delete products',
+            
             // Deal permissions
             'view deals',
             'create deals',
@@ -93,6 +99,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $manager->givePermissionTo([
             'view leads', 'create leads', 'edit leads', 'delete leads',
             'view clients', 'create clients', 'edit clients', 'delete clients',
+            'view products', 'create products', 'edit products', 'delete products',
             'view deals', 'create deals', 'edit deals', 'delete deals',
             'view quotes', 'create quotes', 'edit quotes', 'delete quotes', 'send quotes',
             'view payments', 'create payments', 'edit payments',
@@ -106,6 +113,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $salesRep->givePermissionTo([
             'view leads', 'create leads', 'edit leads',
             'view clients', 'create clients', 'edit clients',
+            'view products',
             'view deals', 'create deals', 'edit deals',
             'view quotes', 'create quotes', 'edit quotes', 'send quotes',
             'view follow-ups', 'create follow-ups', 'edit follow-ups',

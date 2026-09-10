@@ -58,6 +58,11 @@ class Client extends Model
         return $this->hasMany(LoyaltyPoint::class);
     }
 
+    public function clientProducts(): HasMany
+    {
+        return $this->hasMany(ClientProduct::class);
+    }
+
     public function followUps(): MorphMany
     {
         return $this->morphMany(FollowUp::class, 'followable');

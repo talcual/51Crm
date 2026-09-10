@@ -84,6 +84,10 @@
                             {{ __('Email Settings') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('products.index')">
+                            {{ __('Products') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -153,6 +157,10 @@
 
                 <x-responsive-nav-link :href="route('settings.email.edit')">
                     {{ __('Email Settings') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('products.index')">
+                    {{ __('Products') }}
                 </x-responsive-nav-link>
 
                 @foreach(config('app.available_locales') as $code => $label)
