@@ -59,6 +59,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'view loyalty',
             'manage loyalty',
             
+            // Email campaign permissions
+            'view email campaigns',
+            'create email campaigns',
+            'edit email campaigns',
+            'delete email campaigns',
+            'send email campaigns',
+            'manage email settings',
+            
             // User management
             'view users',
             'create users',
@@ -90,6 +98,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'view payments', 'create payments', 'edit payments',
             'view follow-ups', 'create follow-ups', 'edit follow-ups', 'delete follow-ups',
             'view loyalty', 'manage loyalty',
+            'view email campaigns', 'create email campaigns', 'edit email campaigns', 'delete email campaigns', 'send email campaigns',
         ]);
 
         // Sales Rep role - can manage leads, clients, deals, and quotes
@@ -101,6 +110,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'view quotes', 'create quotes', 'edit quotes', 'send quotes',
             'view follow-ups', 'create follow-ups', 'edit follow-ups',
             'view loyalty',
+            'view email campaigns', 'create email campaigns', 'edit email campaigns', 'send email campaigns',
         ]);
 
         // Support role - can view most things and manage follow-ups

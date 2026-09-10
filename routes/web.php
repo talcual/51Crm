@@ -8,6 +8,8 @@ use App\Http\Controllers\DealController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LoyaltyController;
+use App\Http\Controllers\EmailSettingController;
+use App\Http\Controllers\EmailCampaignController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,14 @@ Route::middleware('auth')->group(function () {
     Route::get('loyalty', [LoyaltyController::class, 'index'])->name('loyalty.index');
     Route::post('loyalty/{client}/award', [LoyaltyController::class, 'awardPoints'])->name('loyalty.award');
     Route::post('loyalty/{client}/redeem', [LoyaltyController::class, 'redeemPoints'])->name('loyalty.redeem');
+
+    // Email Campaigns
+    Route::resource('email-campaigns', EmailCampaignController::class);
+    Route::post('email-campaigns/{emailCampaign}/send', [EmailCampaignController::class, 'send'])->name('email-campaigns.send');
+
+    // Email/SMTP Settings
+    Route::get('settings/email', [EmailSettingController::class, 'edit'])->name('settings.email.edit');
+    Route::put('settings/email', [EmailSettingController::class, 'update'])->name('settings.email.update');
 });
 
 require __DIR__.'/auth.php';

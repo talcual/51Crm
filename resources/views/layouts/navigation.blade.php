@@ -33,6 +33,9 @@
                     <x-nav-link :href="route('loyalty.index')" :active="request()->routeIs('loyalty.*')">
                         {{ __('Loyalty') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('email-campaigns.index')" :active="request()->routeIs('email-campaigns.*')">
+                        {{ __('Campaigns') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -54,6 +57,10 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('settings.email.edit')">
+                            {{ __('Email Settings') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -106,6 +113,9 @@
             <x-responsive-nav-link :href="route('loyalty.index')" :active="request()->routeIs('loyalty.*')">
                 {{ __('Loyalty') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('email-campaigns.index')" :active="request()->routeIs('email-campaigns.*')">
+                {{ __('Campaigns') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -118,6 +128,10 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('settings.email.edit')">
+                    {{ __('Email Settings') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
