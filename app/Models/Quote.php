@@ -14,6 +14,7 @@ class Quote extends Model
     protected $fillable = [
         'quote_number',
         'client_id',
+        'lead_id',
         'deal_id',
         'subtotal',
         'tax',
@@ -37,6 +38,11 @@ class Quote extends Model
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function lead(): BelongsTo
+    {
+        return $this->belongsTo(Lead::class);
     }
 
     public function deal(): BelongsTo

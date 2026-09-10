@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Deal;
+use App\Models\Lead;
 use App\Models\Quote;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class QuoteController extends Controller
 {
     public function index(Request $request)
     {
-        $quotes = Quote::with('client', 'deal')
+        $quotes = Quote::with('client', 'lead', 'deal')
             ->when($request->status, fn ($query, $status) => $query->where('status', $status))
             ->latest()
             ->paginate(15)
@@ -27,9 +28,10 @@ class QuoteController extends Controller
     public function create()
     {
         $clients = Client::orderBy('name')->get();
+        $leads = Lead::orderBy('name')->get();
         $deals = Deal::orderBy('title')->get();
 
-        return view('quotes.create', compact('clients', 'deals'));
+        return view('quotes.create', compact('clients', 'leads', 'deals'));
     }
 
     /**
@@ -54,7 +56,7 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        $quote->load('client', 'deal', 'items', 'createdBy');
+        $quote->load('client', 'lead', 'deal', 'items', 'createdBy');
 
         return view('quotes.show', compact('quote'));
     }
@@ -66,9 +68,10 @@ class QuoteController extends Controller
     {
         $quote->load('items');
         $clients = Client::orderBy('name')->get();
+        $leads = Lead::orderBy('name')->get();
         $deals = Deal::orderBy('title')->get();
 
-        return view('quotes.edit', compact('quote', 'clients', 'deals'));
+        return view('quotes.edit', compact('quote', 'clients', 'leads', 'deals'));
     }
 
     /**
@@ -101,7 +104,7 @@ class QuoteController extends Controller
      */
     public function generatePdf(Quote $quote)
     {
-        $quote->load('client', 'deal', 'items');
+        $quote->load('client', 'lead', 'deal', 'items');
 
         $pdf = Pdf::loadView('quotes.pdf', compact('quote'));
 
@@ -111,7 +114,9 @@ class QuoteController extends Controller
     private function validateQuote(Request $request): array
     {
         return $request->validate([
-            'client_id' => 'required|exists:clients,id',
+            'recipient_type' => 'required|in:client,lead',
+            'client_id' => 'required_if:recipient_type,client|nullable|exists:clients,id',
+            'lead_id' => 'required_if:recipient_type,lead|nullable|exists:leads,id',
             'deal_id' => 'nullable|exists:deals,id',
             'status' => 'required|in:draft,sent,accepted,rejected,expired',
             'valid_until' => 'nullable|date',
@@ -131,10 +136,12 @@ class QuoteController extends Controller
         $subtotal = collect($validated['items'])->sum(fn ($item) => $item['quantity'] * $item['unit_price']);
         $tax = $validated['tax'] ?? 0;
         $discount = $validated['discount'] ?? 0;
+        $isForLead = $validated['recipient_type'] === 'lead';
 
         return [
-            'client_id' => $validated['client_id'],
-            'deal_id' => $validated['deal_id'] ?? null,
+            'client_id' => $isForLead ? null : $validated['client_id'],
+            'lead_id' => $isForLead ? $validated['lead_id'] : null,
+            'deal_id' => $isForLead ? null : ($validated['deal_id'] ?? null),
             'subtotal' => $subtotal,
             'tax' => $tax,
             'discount' => $discount,

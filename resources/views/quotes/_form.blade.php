@@ -8,12 +8,24 @@
     if (empty($existingItems)) {
         $existingItems = [['description' => '', 'quantity' => 1, 'unit_price' => '']];
     }
+
+    $recipientType = old('recipient_type', isset($quote) && $quote->lead_id ? 'lead' : 'client');
 @endphp
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
+        <x-input-label for="recipient_type" :value="__('Send Quote To')" />
+        <select id="recipient_type" name="recipient_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required
+            onchange="document.getElementById('client-recipient-wrapper').classList.toggle('hidden', this.value !== 'client'); document.getElementById('lead-recipient-wrapper').classList.toggle('hidden', this.value !== 'lead'); document.getElementById('deal-wrapper').classList.toggle('hidden', this.value !== 'client');">
+            <option value="client" @selected($recipientType === 'client')>{{ __('Client') }}</option>
+            <option value="lead" @selected($recipientType === 'lead')>{{ __('Lead') }}</option>
+        </select>
+        <x-input-error :messages="$errors->get('recipient_type')" class="mt-2" />
+    </div>
+
+    <div id="client-recipient-wrapper" class="{{ $recipientType === 'client' ? '' : 'hidden' }}">
         <x-input-label for="client_id" :value="__('Client')" />
-        <select id="client_id" name="client_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <select id="client_id" name="client_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
             <option value="">{{ __('Select a client') }}</option>
             @foreach($clients as $client)
                 <option value="{{ $client->id }}" @selected(old('client_id', $quote->client_id ?? '') == $client->id)>{{ $client->name }}</option>
@@ -22,7 +34,18 @@
         <x-input-error :messages="$errors->get('client_id')" class="mt-2" />
     </div>
 
-    <div>
+    <div id="lead-recipient-wrapper" class="{{ $recipientType === 'lead' ? '' : 'hidden' }}">
+        <x-input-label for="lead_id" :value="__('Lead')" />
+        <select id="lead_id" name="lead_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="">{{ __('Select a lead') }}</option>
+            @foreach($leads as $lead)
+                <option value="{{ $lead->id }}" @selected(old('lead_id', $quote->lead_id ?? '') == $lead->id)>{{ $lead->name }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('lead_id')" class="mt-2" />
+    </div>
+
+    <div id="deal-wrapper" class="{{ $recipientType === 'client' ? '' : 'hidden' }}">
         <x-input-label for="deal_id" :value="__('Related Deal (optional)')" />
         <select id="deal_id" name="deal_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
             <option value="">{{ __('None') }}</option>

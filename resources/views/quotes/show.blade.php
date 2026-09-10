@@ -33,8 +33,8 @@
                 <div class="p-6">
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">{{ __('Client') }}</dt>
-                            <dd class="text-sm text-gray-900">{{ $quote->client->name ?? __('N/A') }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ $quote->lead_id ? __('Lead') : __('Client') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $quote->client->name ?? $quote->lead->name ?? __('N/A') }}</dd>
                         </div>
                         <div>
                             <dt class="text-sm font-medium text-gray-500">{{ __('Related Deal') }}</dt>

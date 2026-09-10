@@ -19,9 +19,9 @@
     <p>Status: {{ ucfirst($quote->status) }} | Valid Until: {{ optional($quote->valid_until)->format('M d, Y') ?? 'N/A' }}</p>
 
     <p>
-        <strong>Client:</strong> {{ $quote->client->name ?? 'N/A' }}<br>
-        {{ $quote->client->email ?? '' }}<br>
-        {{ $quote->client->phone ?? '' }}
+        <strong>{{ $quote->lead_id ? 'Lead' : 'Client' }}:</strong> {{ $quote->client->name ?? $quote->lead->name ?? 'N/A' }}<br>
+        {{ $quote->client->email ?? $quote->lead->email ?? '' }}<br>
+        {{ $quote->client->phone ?? $quote->lead->phone ?? '' }}
     </p>
 
     <table>

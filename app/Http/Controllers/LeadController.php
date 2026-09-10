@@ -52,7 +52,7 @@ class LeadController extends Controller
      */
     public function show(Lead $lead)
     {
-        $lead->load('assignedUser', 'followUps');
+        $lead->load('assignedUser', 'followUps', 'quotes');
         return view('leads.show', compact('lead'));
     }
 

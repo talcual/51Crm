@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Lead extends Model
@@ -37,5 +38,10 @@ class Lead extends Model
     public function followUps(): MorphMany
     {
         return $this->morphMany(FollowUp::class, 'followable');
+    }
+
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class);
     }
 }
