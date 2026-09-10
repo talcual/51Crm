@@ -8,14 +8,14 @@
                 <form action="{{ route('quotes.pdf', $quote) }}" method="POST" target="_blank">
                     @csrf
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-900">
-                        Download PDF
+                        {{ __('Download PDF') }}
                     </button>
                 </form>
                 <a href="{{ route('quotes.edit', $quote) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
-                    Edit
+                    {{ __('Edit') }}
                 </a>
                 <a href="{{ route('quotes.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300">
-                    Back
+                    {{ __('Back') }}
                 </a>
             </div>
         </div>
@@ -33,24 +33,24 @@
                 <div class="p-6">
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Client</dt>
-                            <dd class="text-sm text-gray-900">{{ $quote->client->name ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Client') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $quote->client->name ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Related Deal</dt>
-                            <dd class="text-sm text-gray-900">{{ $quote->deal->title ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Related Deal') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $quote->deal->title ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Status</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst($quote->status) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Status') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst($quote->status)) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Valid Until</dt>
-                            <dd class="text-sm text-gray-900">{{ optional($quote->valid_until)->format('M d, Y') ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Valid Until') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ optional($quote->valid_until)->format('M d, Y') ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Created By</dt>
-                            <dd class="text-sm text-gray-900">{{ $quote->createdBy->name ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Created By') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $quote->createdBy->name ?? __('N/A') }}</dd>
                         </div>
                     </dl>
                 </div>
@@ -58,14 +58,14 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Line Items</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Line Items') }}</h3>
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Qty</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Unit Price</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">{{ __('Description') }}</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">{{ __('Qty') }}</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">{{ __('Unit Price') }}</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">{{ __('Total') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -83,19 +83,19 @@
                     <div class="flex justify-end mt-4">
                         <dl class="w-64 space-y-1">
                             <div class="flex justify-between text-sm">
-                                <dt class="text-gray-500">Subtotal</dt>
+                                <dt class="text-gray-500">{{ __('Subtotal') }}</dt>
                                 <dd class="text-gray-900">${{ number_format($quote->subtotal, 2) }}</dd>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <dt class="text-gray-500">Tax</dt>
+                                <dt class="text-gray-500">{{ __('Tax') }}</dt>
                                 <dd class="text-gray-900">${{ number_format($quote->tax, 2) }}</dd>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <dt class="text-gray-500">Discount</dt>
+                                <dt class="text-gray-500">{{ __('Discount') }}</dt>
                                 <dd class="text-gray-900">-${{ number_format($quote->discount, 2) }}</dd>
                             </div>
                             <div class="flex justify-between text-base font-semibold border-t pt-1">
-                                <dt>Total</dt>
+                                <dt>{{ __('Total') }}</dt>
                                 <dd>${{ number_format($quote->total, 2) }}</dd>
                             </div>
                         </dl>
@@ -103,14 +103,14 @@
 
                     @if($quote->terms)
                         <div class="mt-6">
-                            <h4 class="text-sm font-medium text-gray-500">Terms</h4>
+                            <h4 class="text-sm font-medium text-gray-500">{{ __('Terms') }}</h4>
                             <p class="text-sm text-gray-900">{{ $quote->terms }}</p>
                         </div>
                     @endif
 
                     @if($quote->notes)
                         <div class="mt-4">
-                            <h4 class="text-sm font-medium text-gray-500">Notes</h4>
+                            <h4 class="text-sm font-medium text-gray-500">{{ __('Notes') }}</h4>
                             <p class="text-sm text-gray-900">{{ $quote->notes }}</p>
                         </div>
                     @endif

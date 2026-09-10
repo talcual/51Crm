@@ -83,7 +83,18 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'es'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available Application Locales
+    |--------------------------------------------------------------------------
+    |
+    | The list of locales the application supports for the language switcher.
+    |
+    */
+
+    'available_locales' => ['es' => 'Español', 'en' => 'English'],
 
     /*
     |--------------------------------------------------------------------------

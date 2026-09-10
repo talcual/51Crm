@@ -5,7 +5,7 @@
                 {{ __('Email Campaigns') }}
             </h2>
             <a href="{{ route('email-campaigns.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                New Campaign
+                {{ __('New Campaign') }}
             </a>
         </div>
     </x-slot>
@@ -30,11 +30,11 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recipients</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sent At</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Name') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Recipients') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Sent At') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -50,26 +50,26 @@
                                                 @elseif($campaign->status === 'sent') bg-green-100 text-green-800
                                                 @else bg-red-100 text-red-800
                                                 @endif">
-                                                {{ ucfirst($campaign->status) }}
+                                                {{ __(ucfirst($campaign->status)) }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ optional($campaign->sent_at)->format('M d, Y H:i') ?? 'N/A' }}
+                                            {{ optional($campaign->sent_at)->format('M d, Y H:i') ?? __('N/A') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('email-campaigns.show', $campaign) }}" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
-                                            <a href="{{ route('email-campaigns.edit', $campaign) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                            <a href="{{ route('email-campaigns.show', $campaign) }}" class="text-blue-600 hover:text-blue-900 mr-3">{{ __('View') }}</a>
+                                            <a href="{{ route('email-campaigns.edit', $campaign) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">{{ __('Edit') }}</a>
                                             <form action="{{ route('email-campaigns.destroy', $campaign) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure you want to delete this campaign?')">Delete</button>
+                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('{{ __('Are you sure you want to delete this campaign?') }}')">{{ __('Delete') }}</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                            No campaigns found. <a href="{{ route('email-campaigns.create') }}" class="text-blue-600 hover:text-blue-900">Create your first campaign</a>
+                                            {{ __('No campaigns found.') }} <a href="{{ route('email-campaigns.create') }}" class="text-blue-600 hover:text-blue-900">{{ __('Create your first campaign') }}</a>
                                         </td>
                                     </tr>
                                 @endforelse

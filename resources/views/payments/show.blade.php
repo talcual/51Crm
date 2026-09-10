@@ -6,10 +6,10 @@
             </h2>
             <div class="flex gap-3">
                 <a href="{{ route('payments.edit', $payment) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
-                    Edit
+                    {{ __('Edit') }}
                 </a>
                 <a href="{{ route('payments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300">
-                    Back
+                    {{ __('Back') }}
                 </a>
             </div>
         </div>
@@ -27,36 +27,36 @@
                 <div class="p-6">
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Client</dt>
-                            <dd class="text-sm text-gray-900">{{ $payment->client->name ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Client') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $payment->client->name ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Related Deal</dt>
-                            <dd class="text-sm text-gray-900">{{ $payment->deal->title ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Related Deal') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $payment->deal->title ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Amount</dt>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Amount') }}</dt>
                             <dd class="text-sm text-gray-900">${{ number_format($payment->amount, 2) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Status</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst($payment->status) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Status') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst($payment->status)) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Payment Method</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst(str_replace('_', ' ', $payment->payment_method)) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Payment Method') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst(str_replace('_', ' ', $payment->payment_method))) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Payment Date</dt>
-                            <dd class="text-sm text-gray-900">{{ optional($payment->payment_date)->format('M d, Y') ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Payment Date') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ optional($payment->payment_date)->format('M d, Y') ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Transaction ID</dt>
-                            <dd class="text-sm text-gray-900">{{ $payment->transaction_id ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Transaction ID') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $payment->transaction_id ?? __('N/A') }}</dd>
                         </div>
                         @if($payment->notes)
                             <div class="md:col-span-2">
-                                <dt class="text-sm font-medium text-gray-500">Notes</dt>
+                                <dt class="text-sm font-medium text-gray-500">{{ __('Notes') }}</dt>
                                 <dd class="text-sm text-gray-900">{{ $payment->notes }}</dd>
                             </div>
                         @endif
@@ -66,15 +66,15 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Loyalty Points Earned ({{ $payment->loyaltyPoints->count() }})</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Loyalty Points Earned') }} ({{ $payment->loyaltyPoints->count() }})</h3>
                     <ul class="space-y-2">
                         @forelse($payment->loyaltyPoints as $point)
                             <li class="text-sm text-gray-700 flex justify-between">
                                 <span>{{ $point->reason }}</span>
-                                <span class="text-gray-500">{{ $point->points }} pts</span>
+                                <span class="text-gray-500">{{ $point->points }} {{ __('pts') }}</span>
                             </li>
                         @empty
-                            <li class="text-sm text-gray-500">No loyalty points recorded.</li>
+                            <li class="text-sm text-gray-500">{{ __('No loyalty points recorded.') }}</li>
                         @endforelse
                     </ul>
                 </div>

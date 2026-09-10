@@ -16,9 +16,9 @@
 
                         <div class="flex justify-end gap-3 mt-6">
                             <a href="{{ route('quotes.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300">
-                                Cancel
+                                {{ __('Cancel') }}
                             </a>
-                            <x-primary-button>Save Quote</x-primary-button>
+                            <x-primary-button>{{ __('Save Quote') }}</x-primary-button>
                         </div>
                     </form>
                 </div>

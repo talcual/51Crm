@@ -14,9 +14,9 @@
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-gray-500">Total Leads</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('Total Leads') }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ $stats['total_leads'] }}</p>
-                                <p class="text-xs text-gray-500 mt-1">{{ $stats['new_leads'] }} new</p>
+                                <p class="text-xs text-gray-500 mt-1">{{ $stats['new_leads'] }} {{ __('new') }}</p>
                             </div>
                             <div class="bg-blue-100 rounded-full p-3">
                                 <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-gray-500">Total Clients</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('Total Clients') }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ $stats['total_clients'] }}</p>
                             </div>
                             <div class="bg-green-100 rounded-full p-3">
@@ -49,7 +49,7 @@
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-gray-500">Active Deals</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('Active Deals') }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ $stats['active_deals'] }}</p>
                                 <p class="text-xs text-gray-500 mt-1">${{ number_format($stats['total_deals_value'], 2) }}</p>
                             </div>
@@ -67,9 +67,9 @@
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-gray-500">This Month</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('This Month') }}</p>
                                 <p class="text-2xl font-bold text-gray-900">${{ number_format($stats['payments_this_month'], 2) }}</p>
-                                <p class="text-xs text-gray-500 mt-1">{{ $stats['quotes_pending'] }} pending quotes</p>
+                                <p class="text-xs text-gray-500 mt-1">{{ $stats['quotes_pending'] }} {{ __('pending quotes') }}</p>
                             </div>
                             <div class="bg-yellow-100 rounded-full p-3">
                                 <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@
                 <!-- Recent Leads -->
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Leads</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Recent Leads') }}</h3>
                         <div class="space-y-4">
                             @forelse($recent_leads as $lead)
                                 <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-b-0">
@@ -102,17 +102,17 @@
                                             @elseif($lead->status === 'converted') bg-purple-100 text-purple-800
                                             @else bg-red-100 text-red-800
                                             @endif">
-                                            {{ ucfirst($lead->status) }}
+                                            {{ __(ucfirst($lead->status)) }}
                                         </span>
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-gray-500 text-center py-4">No recent leads</p>
+                                <p class="text-gray-500 text-center py-4">{{ __('No recent leads') }}</p>
                             @endforelse
                         </div>
                         <div class="mt-4">
                             <a href="{{ route('leads.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                                View all leads →
+                                {{ __('View all leads') }} →
                             </a>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                 <!-- Recent Deals -->
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Active Deals</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Active Deals') }}</h3>
                         <div class="space-y-4">
                             @forelse($recent_deals as $deal)
                                 <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-b-0">
@@ -135,12 +135,12 @@
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-gray-500 text-center py-4">No active deals</p>
+                                <p class="text-gray-500 text-center py-4">{{ __('No active deals') }}</p>
                             @endforelse
                         </div>
                         <div class="mt-4">
                             <a href="{{ route('deals.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                                View all deals →
+                                {{ __('View all deals') }} →
                             </a>
                         </div>
                     </div>
@@ -150,20 +150,20 @@
             <!-- Welcome Message -->
             <div class="mt-8 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Welcome to 51CRM! 👋</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ __('Welcome to 51CRM!') }} 👋</h3>
                     <p class="text-gray-600">
-                        You're logged in as <strong>{{ auth()->user()->name }}</strong>. 
-                        This is your CRM dashboard where you can manage leads, clients, deals, quotes, payments, and more.
+                        {{ __('You\'re logged in as') }} <strong>{{ auth()->user()->name }}</strong>.
+                        {{ __('This is your CRM dashboard where you can manage leads, clients, deals, quotes, payments, and more.') }}
                     </p>
                     <div class="mt-4 flex flex-wrap gap-4">
                         <a href="{{ route('leads.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Add New Lead
+                            {{ __('Add New Lead') }}
                         </a>
                         <a href="{{ route('clients.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            View Clients
+                            {{ __('View Clients') }}
                         </a>
                         <a href="{{ route('deals.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            View Deals
+                            {{ __('View Deals') }}
                         </a>
                     </div>
                 </div>

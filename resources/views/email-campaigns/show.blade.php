@@ -6,13 +6,13 @@
             </h2>
             <div class="flex gap-2">
                 <a href="{{ route('email-campaigns.edit', $campaign) }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300">
-                    Edit
+                    {{ __('Edit') }}
                 </a>
                 @if($campaign->status === 'draft' || $campaign->status === 'failed')
-                    <form action="{{ route('email-campaigns.send', $campaign) }}" method="POST" onsubmit="return confirm('Send this campaign now?')">
+                    <form action="{{ route('email-campaigns.send', $campaign) }}" method="POST" onsubmit="return confirm('{{ __('Send this campaign now?') }}')">
                         @csrf
                         <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700">
-                            Send Now
+                            {{ __('Send Now') }}
                         </button>
                     </form>
                 @endif
@@ -38,25 +38,25 @@
                 <div class="p-6">
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Subject</dt>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Subject') }}</dt>
                             <dd class="text-sm text-gray-900">{{ $campaign->subject }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Recipient Type</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst(str_replace('_', ' ', $campaign->recipient_type)) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Recipient Type') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst(str_replace('_', ' ', $campaign->recipient_type))) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Status</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst($campaign->status) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Status') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst($campaign->status)) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Sent At</dt>
-                            <dd class="text-sm text-gray-900">{{ optional($campaign->sent_at)->format('M d, Y H:i') ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Sent At') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ optional($campaign->sent_at)->format('M d, Y H:i') ?? __('N/A') }}</dd>
                         </div>
                     </dl>
 
                     <div class="mt-4">
-                        <dt class="text-sm font-medium text-gray-500 mb-1">Content Preview</dt>
+                        <dt class="text-sm font-medium text-gray-500 mb-1">{{ __('Content Preview') }}</dt>
                         <div class="border border-gray-200 rounded-md p-4 prose max-w-none">
                             {!! $campaign->content !!}
                         </div>
@@ -66,28 +66,28 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-sm font-medium text-gray-700 mb-4">Recipients ({{ $campaign->recipients->count() }})</h3>
+                    <h3 class="text-sm font-medium text-gray-700 mb-4">{{ __('Recipients') }} ({{ $campaign->recipients->count() }})</h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sent At</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Error</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Email') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Sent At') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Error') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @forelse($campaign->recipients as $recipient)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $recipient->email }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ucfirst($recipient->status) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ optional($recipient->sent_at)->format('M d, Y H:i') ?? 'N/A' }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ __(ucfirst($recipient->status)) }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ optional($recipient->sent_at)->format('M d, Y H:i') ?? __('N/A') }}</td>
                                         <td class="px-6 py-4 text-sm text-red-500">{{ $recipient->error }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">No recipients yet. Send the campaign to build the recipient list.</td>
+                                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">{{ __('No recipients yet. Send the campaign to build the recipient list.') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>

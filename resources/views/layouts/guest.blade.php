@@ -16,6 +16,12 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+            <div class="w-full sm:max-w-md flex justify-end px-6 sm:px-0 mb-2">
+                @foreach(config('app.available_locales') as $code => $label)
+                    <a href="{{ route('locale.switch', $code) }}" class="text-xs ml-3 {{ app()->getLocale() === $code ? 'font-semibold text-gray-900' : 'text-gray-500' }}">{{ $label }}</a>
+                @endforeach
+            </div>
+
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />

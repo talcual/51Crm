@@ -6,10 +6,10 @@
             </h2>
             <div class="flex gap-3">
                 <a href="{{ route('deals.edit', $deal) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
-                    Edit
+                    {{ __('Edit') }}
                 </a>
                 <a href="{{ route('deals.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300">
-                    Back
+                    {{ __('Back') }}
                 </a>
             </div>
         </div>
@@ -28,40 +28,40 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-4">{{ $deal->title }}</h3>
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Client</dt>
-                            <dd class="text-sm text-gray-900">{{ $deal->client->name ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Client') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $deal->client->name ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Pipeline Stage</dt>
-                            <dd class="text-sm text-gray-900">{{ $deal->pipelineStage->name ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Pipeline Stage') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $deal->pipelineStage->name ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Value</dt>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Value') }}</dt>
                             <dd class="text-sm text-gray-900">${{ number_format($deal->value, 2) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Probability</dt>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Probability') }}</dt>
                             <dd class="text-sm text-gray-900">{{ $deal->probability }}%</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Status</dt>
-                            <dd class="text-sm text-gray-900">{{ ucfirst($deal->status) }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Status') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ __(ucfirst($deal->status)) }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Assigned To</dt>
-                            <dd class="text-sm text-gray-900">{{ $deal->assignedUser->name ?? 'Unassigned' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Assigned To') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ $deal->assignedUser->name ?? __('Unassigned') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Expected Close Date</dt>
-                            <dd class="text-sm text-gray-900">{{ optional($deal->expected_close_date)->format('M d, Y') ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Expected Close Date') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ optional($deal->expected_close_date)->format('M d, Y') ?? __('N/A') }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Closed Date</dt>
-                            <dd class="text-sm text-gray-900">{{ optional($deal->closed_date)->format('M d, Y') ?? 'N/A' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Closed Date') }}</dt>
+                            <dd class="text-sm text-gray-900">{{ optional($deal->closed_date)->format('M d, Y') ?? __('N/A') }}</dd>
                         </div>
                         @if($deal->description)
                             <div class="md:col-span-2">
-                                <dt class="text-sm font-medium text-gray-500">Description</dt>
+                                <dt class="text-sm font-medium text-gray-500">{{ __('Description') }}</dt>
                                 <dd class="text-sm text-gray-900">{{ $deal->description }}</dd>
                             </div>
                         @endif
@@ -71,7 +71,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Payments ({{ $deal->payments->count() }})</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Payments') }} ({{ $deal->payments->count() }})</h3>
                     <ul class="space-y-2">
                         @forelse($deal->payments as $payment)
                             <li class="text-sm text-gray-700 flex justify-between">
@@ -79,7 +79,7 @@
                                 <span class="text-gray-500">${{ number_format($payment->amount, 2) }}</span>
                             </li>
                         @empty
-                            <li class="text-sm text-gray-500">No payments yet.</li>
+                            <li class="text-sm text-gray-500">{{ __('No payments yet.') }}</li>
                         @endforelse
                     </ul>
                 </div>
