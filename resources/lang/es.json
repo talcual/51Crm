@@ -127,6 +127,9 @@
     "Remove": "Quitar",
     "Are you sure you want to remove this product?": "¿Estás seguro de que deseas quitar este producto?",
     "No products purchased yet.": "Aún no se han comprado productos.",
+    "No products available yet.": "Aún no hay productos disponibles.",
+    "Create one first": "Crea uno primero",
+    "You will be able to link purchased products once the client is saved.": "Podrás vincular los productos comprados una vez que guardes al cliente.",
 
     "Add New Deal": "Agregar Negocio",
     "Deals & Pipeline Management": "Gestión de Negocios y Embudo",

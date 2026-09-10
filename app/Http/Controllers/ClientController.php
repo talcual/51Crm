@@ -75,7 +75,10 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        $client->load('clientProducts.product');
+        $products = Product::where('active', true)->orderBy('name')->get();
+
+        return view('clients.edit', compact('client', 'products'));
     }
 
     /**

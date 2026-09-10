@@ -22,7 +22,7 @@ class ClientProductController extends Controller
 
         $client->clientProducts()->create($validated);
 
-        return redirect()->route('clients.show', $client)->with('success', 'Product added to client successfully.');
+        return redirect()->back()->with('success', 'Product added to client successfully.');
     }
 
     /**
@@ -34,6 +34,6 @@ class ClientProductController extends Controller
 
         $clientProduct->delete();
 
-        return redirect()->route('clients.show', $client)->with('success', 'Product removed from client successfully.');
+        return redirect()->back()->with('success', 'Product removed from client successfully.');
     }
 }
